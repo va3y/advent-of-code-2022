@@ -57,7 +57,9 @@ for (const { command, filesizeOfCurrentDirectory, directories } of commands) {
 	}
 
 	if (command.target === "..") {
-		currentDirectory = currentDirectory.parentDirectory as Directory;
+		if (!currentDirectory.parentDirectory)
+			throw "tried to go up and went out of bounds";
+		currentDirectory = currentDirectory.parentDirectory;
 	} else {
 		const temporaryParent = currentDirectory;
 
