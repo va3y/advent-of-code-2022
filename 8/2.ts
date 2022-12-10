@@ -7,33 +7,32 @@ const HEIGHT = trees.length;
 
 let maxScore = 0;
 trees.forEach((row, y) => row.forEach((_, x) => calcScore(x, y)));
-// calcScore(2, 2);
 
 function calcScore(startX: number, startY: number) {
   const startHeight = trees[startY][startX];
 
-  let right = 0;
+  let right = 1;
   for (let i = startX + 1; i < WIDTH; i++) {
     if (trees[startY][i] > startHeight) {
       right++;
     } else break;
   }
 
-  let left = 0;
+  let left = 1;
   for (let i = startX - 1; i >= 0; i--) {
     if (trees[startY][i] > startHeight) {
       left++;
     } else break;
   }
 
-  let up = 0;
+  let up = 1;
   for (let i = startY + 1; i < HEIGHT; i++) {
     if (trees[i][startX] > startHeight) {
       up++;
     } else break;
   }
 
-  let down = 0;
+  let down = 1;
   for (let i = startY - 1; i >= 0; i--) {
     if (trees[i][startX] > startHeight) {
       down++;
