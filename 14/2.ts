@@ -30,16 +30,16 @@ for (const path of paths) {
     }
   }
 }
-const abyssYPoint =
+const floorPoint =
   Array(...walls.values()).map((str) => parseInt(str.split("-")[1])).sort(
     (a, b) => {
       return b - a;
     },
-  )[0] + 1;
+  )[0] + 2;
 
 let sand = { x: 500, y: 0 };
-console.log(abyssYPoint);
 let ans = 0;
+
 const reset = () => sand = { x: 500, y: 0 };
 
 while (true) {
@@ -48,15 +48,16 @@ while (true) {
   const left = `${sand.x - 1}-${sand.y + 1}`;
   const right = `${sand.x + 1}-${sand.y + 1}`;
 
-  console.log(sand);
+  console.log(sand)
 
-  if (sand.y > abyssYPoint) {
-    console.log("abyss!");
-    console.log(walls, ans);
-    break;
+
+  if (walls.has(`${500}-${0}`)) {
+    console.log('done!', ans)
+    break
   }
 
-  if (walls.has(belowPoint) && walls.has(left) && walls.has(right)) {
+
+  if (sand.y === floorPoint - 1 || walls.has(belowPoint) && walls.has(left) && walls.has(right)) {
     walls.add(current);
     ans++;
     reset();
@@ -75,3 +76,4 @@ while (true) {
 
   sand.y++;
 }
+
